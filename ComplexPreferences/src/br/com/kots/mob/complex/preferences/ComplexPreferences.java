@@ -1,16 +1,17 @@
 package br.com.kots.mob.complex.preferences;
 
 import java.lang.reflect.Type;
+import java.util.Map;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class ComplexPreferences {
+public class ComplexPreferences implements SharedPreferences {
 
 	private static ComplexPreferences complexPreferences;
-	private Context context;
 	private SharedPreferences preferences;
 	private SharedPreferences.Editor editor;
 	private static Gson GSON = new Gson();
@@ -18,7 +19,6 @@ public class ComplexPreferences {
 	}.getType();
 
 	private ComplexPreferences(Context context, String namePreferences, int mode) {
-		this.context = context;
 		if (namePreferences == null || namePreferences.equals("")) {
 			namePreferences = "complex_preferences";
 		}
@@ -49,6 +49,10 @@ public class ComplexPreferences {
 		editor.putString(key, GSON.toJson(object));
 	}
 
+	public void removeObject(String key) {
+		editor.remove(key);
+	}
+	
 	public void commit() {
 		editor.commit();
 	}
@@ -66,6 +70,57 @@ public class ComplexPreferences {
 			}
 		}
 	}
+
+	@Override
+	public boolean contains(String key) {
+		return preferences.contains(key);
+	}
+
+	@Override
+	public Editor edit() {
+		return preferences.edit();
+	}
+
+	@Override
+	public Map<String, ?> getAll() {
+		return preferences.getAll();
+	}
+
+	@Override
+	public boolean getBoolean(String key, boolean defValue) {
+		return preferences.getBoolean(key, defValue);
+	}
+
+	@Override
+	public float getFloat(String key, float defValue) {
+		return preferences.getFloat(key, defValue);
+	}
+
+	@Override
+	public int getInt(String key, int defValue) {
+		return preferences.getInt(key, defValue);
+	}
+
+	@Override
+	public long getLong(String key, long defValue) {
+		return preferences.getLong(key, defValue);
+	}
+
+	@Override
+	public String getString(String key, String defValue) {
+		return preferences.getString(key, defValue);
+	}
+
+	@Override
+	public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+		preferences.registerOnSharedPreferenceChangeListener(listener);	
+	}
+
+	@Override
+	public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+		preferences.unregisterOnSharedPreferenceChangeListener(listener);	
+	}
 		
 	
 }
+
