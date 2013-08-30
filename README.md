@@ -70,3 +70,21 @@ Get your complex object
 ```
 
 Good work!
+
+--------------------------------------
+update kimukou.buzz
+
+need append local.properties (using ant)
+
+ComplexPreferences
+	ant jar task add (using custom_rules)
+		ant jar
+	
+
+test ExampleComplexPreferences not reference library project
+
+ExampleComplexPreferences
+	ant after-copy/after-copy-install task add (using custom_rules)
+		ant release after-copy after-copy-install
+
+

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,7 +20,7 @@ public class ComplexPreferences implements SharedPreferences {
 	}.getType();
 
 	private ComplexPreferences(Context context, String namePreferences, int mode) {
-		if (namePreferences == null || namePreferences.equals("")) {
+		if (namePreferences == null || "".equals(namePreferences.trim())) {
 			namePreferences = "complex_preferences";
 		}
 		preferences = context.getSharedPreferences(namePreferences, mode);
@@ -42,7 +43,7 @@ public class ComplexPreferences implements SharedPreferences {
 			throw new IllegalArgumentException("object is null");
 		}
 		
-		if(key.equals("") || key == null){
+		if(key == null || "".equals(key.trim())){
 			throw new IllegalArgumentException("key is empty or null");
 		}
 		
@@ -54,7 +55,10 @@ public class ComplexPreferences implements SharedPreferences {
 	}
 	
 	public void commit() {
-		editor.commit();
+		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.GINGERBREAD){
+			ComplexPreferencesEx.apply(editor);
+		}
+		else editor.commit();
 	}
 
 	public <T> T getObject(String key, Class<T> a) {
