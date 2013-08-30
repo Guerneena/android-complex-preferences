@@ -85,6 +85,9 @@ test ExampleComplexPreferences not reference library project
 
 ExampleComplexPreferences
 	ant after-copy/after-copy-install task add (using custom_rules)
-		ant release after-copy after-copy-install
+		ant debug after-copy after-copy-install
 
-
+check device 
+	IS01(Android 1.6)
+	ArrowsZ(Android 2.3.5)
+	Xoom(Android 3.2)
