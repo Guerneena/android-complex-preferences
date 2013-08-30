@@ -77,17 +77,28 @@ update kimukou.buzz
 need append local.properties (using ant)
 
 ComplexPreferences
+
 	ant jar task add (using custom_rules)
+
+```java
 		ant jar
+```
 	
 
 test ExampleComplexPreferences not reference library project
 
 ExampleComplexPreferences
+
 	ant after-copy/after-copy-install task add (using custom_rules)
+
+```java
 		ant debug after-copy after-copy-install
+```
 
 check device 
+
+```java
 	IS01(Android 1.6)
 	ArrowsZ(Android 2.3.5)
 	Xoom(Android 3.2)
+```
