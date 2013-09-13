@@ -2,6 +2,11 @@ package br.com.kots.mob.complex.preferences;
 
 import net.arnx.jsonic.JSON;
 
+/*
+ *  ref http://jsonic.sourceforge.jp/
+ *  reamarks public field only to json convert
+ */
+
 public class ComplexPreferencesJsonic implements ComplexPreferencesHelper{
 
 	public ComplexPreferencesJsonic(){

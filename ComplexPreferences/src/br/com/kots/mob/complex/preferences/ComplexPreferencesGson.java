@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 /*
  *  ref http://www.ne.jp/asahi/hishidama/home/tech/java/google/gson.html
+ *  reamarks deep class is not simple copy
  */
 public class ComplexPreferencesGson implements ComplexPreferencesHelper{
 	private Gson GSON = null;

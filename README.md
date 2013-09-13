@@ -72,33 +72,36 @@ Get your complex object
 Good work!
 
 --------------------------------------
-update kimukou.buzz
 
-need append local.properties (using ant)
+# update kimukou.buzz
 
-ComplexPreferences
+- jsonic support(classpath found jsonic.jar using/not found gson using)
+- need append local.properties (using ant)
+- .project/.classpath add (import project difficalte)
+
+
+## ComplexPreferences
 
 	ant jar task add (using custom_rules)
 
-```java
-		ant jar
+```
+	ant jar
 ```
 	
-
 test ExampleComplexPreferences not reference library project
 
-ExampleComplexPreferences
+## ExampleComplexPreferences
 
-	ant after-copy/after-copy-install task add (using custom_rules)
+ant after-copy/after-copy-install task add (using custom_rules)
 
-```java
-		ant debug after-copy after-copy-install
+```
+	ant debug after-copy after-copy-install
 ```
 
-check device 
-
-```java
-	IS01(Android 1.6)
-	ArrowsZ(Android 2.3.5)
-	Xoom(Android 3.2)
-```
+### check device
+ 
+- IS01(Android 1.6)
+- galaxyTab(Android 2.2)
+- ArrowsZ(Android 2.3.5)
+- Xoom(Android 3.2)
+- Nexsus7(Android 4.3)
