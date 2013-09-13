@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ComplexPreferences implements SharedPreferences {
@@ -16,7 +15,9 @@ public class ComplexPreferences implements SharedPreferences {
 	private static ComplexPreferences complexPreferences;
 	private SharedPreferences preferences;
 	private SharedPreferences.Editor editor;
-	private static Gson GSON = new Gson();
+
+	private ComplexPreferencesHelper helper;
+	
 	Type typeOfObject = new TypeToken<Object>() {
 	}.getType();
 
@@ -26,6 +27,13 @@ public class ComplexPreferences implements SharedPreferences {
 		}
 		preferences = context.getSharedPreferences(namePreferences, mode);
 		editor = preferences.edit();
+		
+		if(checkLibrary("net.arnx.jsonic.JSON")){
+			helper = new ComplexPreferencesJsonic();
+		}
+		else{
+			helper = new ComplexPreferencesGson();
+		}
 	}
 
 	public static ComplexPreferences getComplexPreferences(Context context,
@@ -34,20 +42,17 @@ public class ComplexPreferences implements SharedPreferences {
 		if (complexPreferences == null) {
 			complexPreferences = new ComplexPreferences(context,namePreferences, mode);
 		}
-
 		return complexPreferences;
 	}
-
-	public void putObject(String key, Object object) {
-		if(object == null){
-			throw new IllegalArgumentException("object is null");
+	
+	
+	public boolean checkLibrary(String checkClassName){
+		try {
+			Class.forName(checkClassName);
+			return true;
+		} catch (Exception e) {
 		}
-		
-		if(key == null || "".equals(key.trim())){
-			throw new IllegalArgumentException("key is empty or null");
-		}
-		
-		editor.putString(key, GSON.toJson(object));
+		return false;
 	}
 
 	public void removeObject(String key) {
@@ -61,6 +66,18 @@ public class ComplexPreferences implements SharedPreferences {
 		else editor.commit();
 	}
 
+	public void putObject(String key, Object object) {
+		if(object == null){
+			throw new IllegalArgumentException("object is null");
+		}
+		
+		if(key == null || "".equals(key.trim())){
+			throw new IllegalArgumentException("key is empty or null");
+		}
+		//editor.putString(key, GSON.toJson(object));
+		editor.putString(key, helper.putObjectCore(object));
+	}
+
 	public <T> T getObject(String key, Class<T> a) {
 	
 		String gson = preferences.getString(key, null);
@@ -69,7 +86,8 @@ public class ComplexPreferences implements SharedPreferences {
 		} 
 		//else {
 			try{
-				return GSON.fromJson(gson, a);
+				//return GSON.fromJson(gson, a);
+				return helper.getObject(gson, a);
 			} catch (Exception e) {
 				throw new IllegalArgumentException("Object storaged with key " + key + " is instanceof other class");				
 			}

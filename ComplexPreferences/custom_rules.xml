@@ -64,7 +64,7 @@
         	basedir="bin/classes"
 	    />
 		<copy todir="target" >
-      	  <fileset dir="libs">
+      	  <fileset dir="libs" includes="*.jar">
 	      </fileset>
     	</copy>
 	</target>
