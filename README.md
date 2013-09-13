@@ -1,3 +1,7 @@
+#What i modified
+
+Add `pom.xml` files to make it possible to build with maven. And make it easier to integrate with my project.
+
 Complex Preferences Android - by Felipe Silvestre
 ===========================
 
