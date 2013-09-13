@@ -2,6 +2,7 @@ package br.com.kots.mob.complex.preferences;
 
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Set;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,8 +32,7 @@ public class ComplexPreferences implements SharedPreferences {
 			String namePreferences, int mode) {
 
 		if (complexPreferences == null) {
-			complexPreferences = new ComplexPreferences(context,
-					namePreferences, mode);
+			complexPreferences = new ComplexPreferences(context,namePreferences, mode);
 		}
 
 		return complexPreferences;
@@ -66,13 +66,14 @@ public class ComplexPreferences implements SharedPreferences {
 		String gson = preferences.getString(key, null);
 		if (gson == null) {
 			return null;
-		} else {
+		} 
+		//else {
 			try{
 				return GSON.fromJson(gson, a);
 			} catch (Exception e) {
 				throw new IllegalArgumentException("Object storaged with key " + key + " is instanceof other class");				
 			}
-		}
+		//}
 	}
 
 	@Override
@@ -124,7 +125,13 @@ public class ComplexPreferences implements SharedPreferences {
 	public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
 		preferences.unregisterOnSharedPreferenceChangeListener(listener);	
 	}
-		
-	
+
+	@Override
+	public Set<String> getStringSet(String key, Set<String> values) {
+		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+			return ComplexPreferencesEx.getStringSet(preferences,key, values);
+		}
+		return null;
+	}
 }
 
