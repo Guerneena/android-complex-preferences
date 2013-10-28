@@ -1,6 +1,3 @@
-#What i modified
-
-Add `pom.xml` files to make it possible to build with maven. And make it easier to integrate with my project.
 
 Complex Preferences Android - by Felipe Silvestre
 ===========================
@@ -29,6 +26,17 @@ And you can get it when you need!
 ```java
     ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "mypref", MODE_PRIVATE);
     User user = complexPreferences.getObject("user", User.class);
+```
+
+To remove or clear objects just use #removeObject(String key) and #clear() the same way as you'd do with standard android shared preferences editor.
+```java
+    ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "mypref", MODE_PRIVATE);;
+    complexPreferences.removeObject("user");
+    complexPreferences.commit();
+```
+```java
+    ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "mypref", MODE_PRIVATE);;
+    complexPreferences.clear()
 ```
 
 Simple and effective.
@@ -74,6 +82,11 @@ Get your complex object
 ```
 
 Good work!
+
+--------------------------------------
+# update ufo22940268
+
+Add `pom.xml` files to make it possible to build with maven. And make it easier to integrate with my project.
 
 --------------------------------------
 
