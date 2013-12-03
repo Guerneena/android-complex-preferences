@@ -59,12 +59,17 @@ public class ComplexPreferences implements SharedPreferences {
 		editor.remove(key);
 	}
 	
-	public void commit() {
+	public boolean commit() {
 		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.GINGERBREAD){
 			ComplexPreferencesEx.apply(editor);
+			return true;
 		}
 		else editor.commit();
 	}
+	
+	public void clear() {
+		editor.clear();
+    }
 
 	public void putObject(String key, Object object) {
 		if(object == null){
