@@ -1,6 +1,6 @@
 package br.com.kots.mob.complex.preferences;
 
-import java.lang.reflect.Type;
+//import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import com.google.gson.reflect.TypeToken;
+//import com.google.gson.reflect.TypeToken;
 
 public class ComplexPreferences implements SharedPreferences {
 
@@ -18,8 +18,8 @@ public class ComplexPreferences implements SharedPreferences {
 
 	private ComplexPreferencesHelper helper;
 	
-	Type typeOfObject = new TypeToken<Object>() {
-	}.getType();
+	//Type typeOfObject = new TypeToken<Object>() {
+	//}.getType();
 
 	private ComplexPreferences(Context context, String namePreferences, int mode) {
 		if (namePreferences == null || "".equals(namePreferences.trim())) {
@@ -89,7 +89,7 @@ public class ComplexPreferences implements SharedPreferences {
 				//return GSON.fromJson(gson, a);
 				return helper.getObject(gson, a);
 			} catch (Exception e) {
-				throw new IllegalArgumentException("Object storaged with key " + key + " is instanceof other class");				
+				throw new IllegalArgumentException("Object storaged with key " + key + " is instanceof other class \n" + gson);				
 			}
 		//}
 	}

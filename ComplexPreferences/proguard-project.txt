@@ -18,3 +18,42 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+
+#============ComplexPreferences===================
+-dontwarn br.com.kots.mob.complex.preferences.ComplexPreferences
+-keepattributes *Annotations*
+-keepattributes Signature
+-keepattributes InnerClasses
+
+# see http://yasu-2.blogspot.jp/2012/04/androidjsonic.html
+-keep class br.com.kots.mob.complex.preferences.ComplexPreferencesJsonic {*;}
+-keep class br.com.kots.mob.complex.preferences.ComplexPreferencesGson {*;}
+
+
+#target class
+-keep class br.com.kots.mob.complex.preferences.example.User {*;}
+#-keepclassmembers public class br.com.kots.mob.complex.preferences.example.User {
+#	private <fields>;
+#}
+-keep class br.com.kots.mob.complex.preferences.example.ListUserComplexPref {*;}
+#-keepclassmembers public class br.com.kots.mob.complex.preferences.example.ListUserComplexPref {
+#	private <fields>;
+#}
+
+
+#============JSONIC===================
+-keep class net.arnx.jsonic.**
+-dontwarn net.arnx.jsonic.**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+#============GSON===================
+-keep class com.google.gson.**
+-dontwarn com.google.gson.**
+
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
