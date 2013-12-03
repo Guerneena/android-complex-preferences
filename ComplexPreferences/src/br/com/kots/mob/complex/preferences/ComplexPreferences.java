@@ -64,7 +64,7 @@ public class ComplexPreferences implements SharedPreferences {
 			ComplexPreferencesEx.apply(editor);
 			return true;
 		}
-		else editor.commit();
+		return editor.commit();
 	}
 	
 	public void clear() {
