@@ -27,13 +27,13 @@ public class ComplexPreferences implements SharedPreferences {
 		}
 		preferences = context.getSharedPreferences(namePreferences, mode);
 		editor = preferences.edit();
-		
-		if(checkLibrary("net.arnx.jsonic.JSON")){
-			helper = new ComplexPreferencesJsonic();
-		}
-		else{
+		//TODO Caused exception look closer 
+//		if(false){
+//			helper = new ComplexPreferencesJsonic();
+//		}
+//		else{
 			helper = new ComplexPreferencesGson();
-		}
+//		}
 	}
 
 	public static ComplexPreferences getComplexPreferences(Context context,
